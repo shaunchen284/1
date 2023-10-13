@@ -237,7 +237,12 @@ def train(args, model, train_dataset,epoch):
             '''Total loss = Loss1+Loss2+Loss3'''
             loss = loss1+loss2+loss3
             loss.backward()
-
+            '''
+            在多任务学习中，我们通常会使用多个损失函数来训练模型。
+            这是因为不同的损失函数可以衡量模型在不同任务上的性能。 
+            在这段代码中，我们使用了三种不同的损失函数来训练模型。
+            将这三种损失相加可以帮助我们更全面地衡量模型的性能，并且可以避免过拟合。
+            '''
             # `clip_grad_norm` helps prevent the exploding gradient problem in RNNs / LSTMs.
             torch.nn.utils.clip_grad_norm_(model.parameters(), args.clip)
             optimizer.step()
